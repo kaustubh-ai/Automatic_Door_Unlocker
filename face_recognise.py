@@ -59,7 +59,7 @@ while True:
 
 			face_encodings = face_recognition.face_encodings(_get_frame()[0], _get_frame()[-1])
 
-		if len(final_name) > 9:  # The no. of matches  = 9
+		if len(final_name) > 9:  # The no. of matches = 9
 			final_count = Counter(final_name)
 			name = max(final_name, key=final_count.get)
 
