@@ -38,7 +38,7 @@ File `encode_image.py` contains the code to encode images. It uses the `face_rec
 
 File `face_recognise.py` contains the code to compare faces. It calculates the eucledian distance between the image vectors using `np.linalg.norm` from numpy. 
 - If the distance is below some tolerance (the smaller the tolerance, the more strict the facial recognition system will be) then we return `True`, indicating the faces match.
--   Otherwise, if the distance is above the tolerance threshold, we return False as the faces do not match.
+-   Otherwise, if the distance is above the tolerance threshold, we return `False` as the faces do not match.
 <br>
 This file also contains code that sends the proper signal to the arduino to switch on / switch off the motor based on the face recognition model's output.
 
