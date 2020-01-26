@@ -1,6 +1,6 @@
 
 
-# Toxic Comment Classification
+# Automatic Door Unlocker
 
 ### Table of Contents
 
@@ -42,6 +42,11 @@ File `face_recognise.py` contains the code to compare faces. It calculates the e
 <br>
 This file also contains code that sends the proper signal to the arduino to switch on / switch off the motor based on the face recognition model's output.
 
+<<<<<<< HEAD
+<a id='arduino'></a>
+
+=======
+>>>>>>> 97479bee9ae37807448c23c6312f8ee76ec7bc6d
 ### 2.3. Arduino
 
 File `motor.ino` contains the arduino code (written in C++) to automatically control the opening and closing of the door. Utilises the arduino pins to send signals to the motor. The USB port is used to send the signal from the laptop to the arduino.
@@ -71,3 +76,7 @@ It will output the name of the person on the console if it is a correct match.
 ```git remote add upstream https://github.com/kaustubh-ai/Automatic_Door_Unlocker.git```
 
 4.  Create a pull request!
+<<<<<<< HEAD
+1
+=======
+>>>>>>> 97479bee9ae37807448c23c6312f8ee76ec7bc6d
