@@ -15,7 +15,7 @@ data = pickle.loads(open(os.path.join(data_dir, 'encodings.pickle'), 'rb').read(
 
 ch = input('1. Laptop Webcam\n2. WiFi Webcam\n')
 if ch == '2':
-	url = input('Enter webcam IP: ')  # URL of your webcam
+	url = input('Enter webcam IP: ')  # URL of your webcam. Eg- 'http://192.168.0.7:8080/video'
 	cap = cv.VideoCapture(url)
 else:
 	cap = cv.VideoCapture(0)
