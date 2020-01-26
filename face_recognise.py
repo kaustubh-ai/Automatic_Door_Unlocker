@@ -7,7 +7,7 @@ import datetime as dt
 import face_recognition
 from collections import Counter
 
-timer = 2
+timer = 3
 ser = serial.Serial('com7', 9600)
 
 data_dir = r'.\data\train'
@@ -20,21 +20,26 @@ if ch == '2':
 else:
 	cap = cv.VideoCapture(0)
 
-face_locations, face_encodings, face_names, final_name, name = [], [], [], [], ''
+face_encodings, face_names, final_name, name = [], [], [], ''
 
-while True:
+
+def _get_frame():
 	ret, frame = cap.read()
 	frame = cv.flip(frame, 1)
 	rgb_frame = frame[:, :, ::-1]
-	cv.imshow('frame', rgb_frame)
-	face_locations = face_recognition.face_locations(rgb_frame, model='hog')
-	face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
+	face_locations = face_recognition.face_locations(rgb_frame, model='cnn')
+	return rgb_frame, face_locations
 
-	if len(face_locations) == 0:
+
+while True:
+	rgb_frame_1, face_locations_1 = _get_frame()[0], _get_frame()[-1]
+	face_encodings = face_recognition.face_encodings(rgb_frame_1, face_locations_1)
+
+	if len(face_locations_1) == 0:
 		ser.write(str.encode('0'))
 		print('Nothing to see')
 
-	if face_locations:
+	if face_locations_1:
 		end_time = dt.datetime.now() + dt.timedelta(seconds=timer)
 
 		while dt.datetime.now() <= end_time:
@@ -52,13 +57,9 @@ while True:
 				face_names.append(name)
 				final_name.append(name)
 
-			ret, frame = cap.read()
-			frame = cv.flip(frame, 1)
-			rgb_frame = frame[:, :, ::-1]
-			face_locations = face_recognition.face_locations(rgb_frame, model='cnn')
-			face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
+			face_encodings = face_recognition.face_encodings(_get_frame()[0], _get_frame()[-1])
 
-		if len(final_name) > timer * 5:
+		if len(final_name) > 9:  # The no. of matches  = 9
 			final_count = Counter(final_name)
 			name = max(final_name, key=final_count.get)
 
